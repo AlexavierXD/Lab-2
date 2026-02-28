@@ -57,7 +57,13 @@ scan_chars:
 
     movb seq_one(%rsi), %al
     movb seq_two(%rsi), %bl
-    xor %bl, %al
+    
+    movb %al, %dl
+    andb %bl, %dl
+    notb %dl
+    
+    orb  %bl, %al
+    andb %dl, %al
 
     mov $8, %cl
 
@@ -115,3 +121,4 @@ convert_ascii:
     syscall
 
 .section .note.GNU-stack,"",@progbits
+
